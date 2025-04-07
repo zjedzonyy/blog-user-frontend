@@ -1,10 +1,11 @@
 import {useEffect, useState} from "react";
+import { Link } from "react-router-dom";
 
 
 export default function Posts() {
     const [posts, setPosts] = useState({});
     const token = localStorage.getItem('token');
-
+    
     useEffect(() => {
         async function fetchPosts() {
           try {
@@ -17,8 +18,6 @@ export default function Posts() {
             });
             const data = await res.json();
             setPosts(data);
-            console.log(data);
-            console.log(localStorage)
           } catch (error) {
             console.error(error);
           }
@@ -28,11 +27,16 @@ export default function Posts() {
 
       return (
         <div>
+          <h1>These are latest posts</h1>
           {posts.length ? (
-            posts.map((post) => (
+            [...posts].reverse().map((post) => (
               <div key={post.id}>
+                <Link to={`/posts/${post.id}`}>
                 <h3>{post.title}</h3>
-                <p>{post.content}</p>
+                <p>{post.author.username} {new Date(post.createdAt).toLocaleString()}</p>
+                <p>{post.body.slice(0, 50)}</p>
+                <hr />
+                </Link>
               </div>
             ))
           ) : (

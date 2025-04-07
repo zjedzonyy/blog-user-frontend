@@ -10,7 +10,6 @@ export default function App() {
     return(
         <>
         <Navbar></Navbar>
-        <h2>Hello</h2>
         {/* <SignupForm></SignupForm> */}
         <main>
             <Outlet />

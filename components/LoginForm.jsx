@@ -1,9 +1,11 @@
 import React,  { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 
 export default function LoginForm() {
     const [formData, setFormData] = React.useState({ username: '', password: ''});
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -16,13 +18,26 @@ export default function LoginForm() {
             });
             const data = await res.json();
             localStorage.setItem('token', data.token)
+            navigate('/posts')
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    const logOut = (e) => {
+        e.preventDefault();
+
+        try {
+            localStorage.removeItem("token");
+            navigate('/login')
         } catch (error) {
             console.error(error);
         }
     }
 
     return(
-        <form onSubmit={handleSubmit}>
+        <>
+        {!localStorage.token ? ( <form onSubmit={handleSubmit}>
         <input 
         type="username" 
         id='username'
@@ -40,6 +55,9 @@ export default function LoginForm() {
         placeholder='Password'
         />
         <button type='submit'>Log In</button>
-        </form>
+        </form> ) : (        
+            <button type='button' onClick={logOut} >Log Out</button>
+        )}
+        </>
     )
 }

@@ -18,8 +18,7 @@ export default function Navbar() {
                         <Link to='/signup'>Sign Up</Link>
                     </div>
                     <div className={classes.tab}>
-                        { token ? (<Link to='/login'>Log In</Link> )
-                        : (<Link to='/homepage'>Log Out </Link>) }
+                        <Link to='/login'>Log In</Link> 
                     </div>
                     <div className={classes.tab}>
                     <Link to='/posts'>Posts</Link>

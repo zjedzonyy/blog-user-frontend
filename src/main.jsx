@@ -7,6 +7,7 @@ import SignupForm from '../components/SignUpForm'
 import Homepage from '../components/Homepage'
 import LoginForm from '../components/LoginForm'
 import Posts from '../components/Posts'
+import Post from '../components/Post'
 
 const router = createBrowserRouter([
   {
@@ -16,7 +17,8 @@ const router = createBrowserRouter([
       { path: 'homepage', element: <Homepage />},
       { path: 'signup', element: <SignupForm />},
       { path: 'login', element: <LoginForm />},
-      { path: 'posts', element: <Posts />}
+      { path: 'posts', element: <Posts />},
+      { path: 'posts/:id', element: <Post />}
     ]
   }
 ])
